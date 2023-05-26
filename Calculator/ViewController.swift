@@ -42,6 +42,19 @@ class ViewController: UIViewController {
     
 	@IBAction func numButtonPressed(_ sender: UIButton) {
 		if let numValue = sender.currentTitle {
+			if numValue == "." {
+				// Check if a dot already exists in the current number
+				if let currentText = displayLabel.text, currentText.contains(".") {
+					return
+				}
+				
+				// Check if the current number is "0" and update it to "0."
+				if displayLabel.text == "0" {
+					displayLabel.text = "0."
+					return
+				}
+			}
+			
 			if displayLabel.text == "0" {
 				displayLabel.text = numValue
 			} else if let currentText = displayLabel.text {
@@ -49,5 +62,6 @@ class ViewController: UIViewController {
 			}
 		}
 	}
+
 
 }
