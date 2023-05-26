@@ -11,7 +11,7 @@ class ViewController: UIViewController {
 	
 	@IBOutlet weak var displayLabel: UILabel!
 	
-	private let calculatorLogic = CalculatorLogic()
+	private var calculatorLogic = CalculatorLogic()
 	
 	@IBAction func calcButtonPressed(_ sender: UIButton) {
 		guard let calcButtonTitle = sender.currentTitle else {

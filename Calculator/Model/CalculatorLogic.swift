@@ -7,13 +7,13 @@
 
 import Foundation
 
-class CalculatorLogic {
+struct CalculatorLogic {
 	private var displayText: String = "0"
 	private var firstOperand: Double?
 	private var secondOperand: Double?
 	private var currentOperator: String?
 	
-	func handleButtonPress(_ buttonTitle: String) -> String {
+	mutating func handleButtonPress(_ buttonTitle: String) -> String {
 		switch buttonTitle {
 		case "AC":
 			clear()
@@ -34,14 +34,14 @@ class CalculatorLogic {
 		return displayText
 	}
 	
-	private func clear() {
+	private mutating func clear() {
 		displayText = "0"
 		firstOperand = nil
 		secondOperand = nil
 		currentOperator = nil
 	}
 	
-	private func toggleSign() {
+	private mutating func toggleSign() {
 		if displayText.hasPrefix("-") {
 			displayText.removeFirst()
 		} else {
@@ -49,20 +49,20 @@ class CalculatorLogic {
 		}
 	}
 	
-	private func calculatePercentage() {
+	private mutating func calculatePercentage() {
 		if let number = Double(displayText) {
 			let result = number / 100.0
 			displayText = formatResult(result)
 		}
 	}
 	
-	private func addDecimalPoint() {
+	private mutating func addDecimalPoint() {
 		if !displayText.contains(".") {
 			displayText += "."
 		}
 	}
 	
-	private func appendNumber(_ number: String) {
+	private mutating func appendNumber(_ number: String) {
 		if displayText == "0" {
 			displayText = number
 		} else {
@@ -70,7 +70,7 @@ class CalculatorLogic {
 		}
 	}
 	
-	private func handleOperator(_ operatorSymbol: String) {
+	private mutating func handleOperator(_ operatorSymbol: String) {
 		if let number = Double(displayText) {
 			firstOperand = number
 			currentOperator = operatorSymbol
@@ -78,7 +78,7 @@ class CalculatorLogic {
 		}
 	}
 	
-	private func calculateResult() {
+	private mutating func calculateResult() {
 		if let firstNumber = firstOperand, let secondNumber = Double(displayText), let operation = currentOperator {
 			var result: Double
 			
