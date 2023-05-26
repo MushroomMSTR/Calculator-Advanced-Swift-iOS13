@@ -14,11 +14,29 @@ class ViewController: UIViewController {
     
     
 	@IBAction func calcButtonPressed(_ sender: UIButton) {
-		if let calcButtonTitle = sender.currentTitle {
-			if calcButtonTitle == "AC" {
-				displayLabel.text = "0"
+		guard let calcButtonTitle = sender.currentTitle else {
+			return
+		}
+		
+		switch calcButtonTitle {
+		case "AC":
+			displayLabel.text = "0"
+		case "+/-":
+			if let currentText = displayLabel.text {
+				if currentText.hasPrefix("-") {
+					displayLabel.text = String(currentText.dropFirst())
+				} else {
+					displayLabel.text = "-" + currentText
+				}
 			}
-			// Handle other non-number button actions here
+		case "%":
+			if let currentText = displayLabel.text, let number = Double(currentText) {
+				let result = number / 100.0
+				displayLabel.text = String(result)
+			}
+		// Add cases for any new buttons here
+		default:
+			break
 		}
 	}
     
