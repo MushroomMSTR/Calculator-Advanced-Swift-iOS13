@@ -2,8 +2,7 @@
 //  ViewController.swift
 //  Calculator
 //
-//  Created by Angela Yu on 10/09/2019.
-//  Copyright © 2019 London App Brewery. All rights reserved.
+//  Created by NazarStf on 26.05.2023.
 //
 
 import UIKit
@@ -14,18 +13,23 @@ class ViewController: UIViewController {
     
     
     
-    @IBAction func calcButtonPressed(_ sender: UIButton) {
-        
-        //What should happen when a non-number button is pressed
+	@IBAction func calcButtonPressed(_ sender: UIButton) {
+		if let calcButtonTitle = sender.currentTitle {
+			if calcButtonTitle == "AC" {
+				displayLabel.text = "0"
+			}
+			// Handle other non-number button actions here
+		}
+	}
     
-    }
-
-    
-    @IBAction func numButtonPressed(_ sender: UIButton) {
-        
-        //What should happen when a number is entered into the keypad
-    
-    }
+	@IBAction func numButtonPressed(_ sender: UIButton) {
+		if let numValue = sender.currentTitle {
+			if displayLabel.text == "0" {
+				displayLabel.text = numValue
+			} else if let currentText = displayLabel.text {
+				displayLabel.text = currentText + numValue
+			}
+		}
+	}
 
 }
-
